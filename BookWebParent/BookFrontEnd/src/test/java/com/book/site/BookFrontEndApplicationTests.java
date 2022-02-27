@@ -1,4 +1,4 @@
-package com.book.bookfrontend;
+package com.book.site;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

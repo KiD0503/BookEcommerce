@@ -1,4 +1,4 @@
-package com.book.bookbackend;
+package com.book.site;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

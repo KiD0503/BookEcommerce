@@ -68,4 +68,11 @@ public class UserRepositoryTests {
         userHieuNguyen.addRole(roleAdmin);// Add role Admin for userHieuNguyen
         repository.save(userHieuNguyen); // Save in db
     }
+
+    @Test
+    public void testGetUserByEmail(){//Check duplicate email
+        String email = "hieunv2111@gmail.com";
+        User user = repository.getUserByEmail(email);
+        assertThat(user).isNotNull();
+    }
 }

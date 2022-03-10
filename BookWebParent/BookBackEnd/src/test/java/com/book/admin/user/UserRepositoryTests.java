@@ -75,4 +75,9 @@ public class UserRepositoryTests {
         User user = repository.getUserByEmail(email);
         assertThat(user).isNotNull();
     }
+
+    @Test
+    public void testCountById(){
+
+    }
 }

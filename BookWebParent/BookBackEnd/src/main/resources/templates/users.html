@@ -81,18 +81,18 @@
             <tbody>
             <tr th:each="user: ${listUsers}">
                 <td>[[${user.id}]]</td>
-                <td><span class="fas fa-user fa-2x"></span></td>
+                <td class="icon-center"><span class="fas fa-user fa-2x"></span></td>
                 <td>[[${user.email}]]</td>
                 <td>[[${user.firstName}]]</td>
                 <td>[[${user.lastName}]]</td>
                 <td>[[${user.roles}]]</td>
-                <td>
-                    <a th:if="${user.enabled == true}" class="fas fa-check-circle icon-green" href=""></a>
-                    <a th:if="${user.enabled == false}" class="fas fa-check-circle icon-dark" href=""></a>
+                <td class="icon-center">
+                    <a th:if="${user.enabled == true}" class="fas fa-check-circle icon-green" th:href="@{'/users/' + ${user.id} + '/enabled/false'}" title="Disable this user"></a>
+                    <a th:if="${user.enabled == false}" class="fas fa-circle icon-dark" th:href="@{'/users/' + ${user.id} + '/enabled/true'}" title="Enable this user"></a>
                 </td>
 
 
-                <td><a class="fas fa-edit fa-1x icon-green" th:href="@{'/users/edit/' + ${user.id}}" title="Edit this user"></a>
+                <td class="icon-center" ><a class="fas fa-edit fa-1x icon-green" th:href="@{'/users/edit/' + ${user.id}}" title="Edit this user"></a>
                     &nbsp;
                     <a class="fas fa-trash fa-1x icon-red link-delete"
                        th:userId = "${user.id}"

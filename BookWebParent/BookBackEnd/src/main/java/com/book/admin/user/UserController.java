@@ -5,6 +5,7 @@ import com.book.common.entity.Role;
 import com.book.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -23,12 +24,12 @@ public class UserController {
 
     @GetMapping("/users")
     public String listFirstPage(Model model) {
-        return listByPage(1, model);
+        return listByPage(1, model, null);
     }
 
     @GetMapping("/users/page/{pageNum}")
-    public String listByPage(@PathVariable( name = "pageNum") int pageNum, Model model){
-        Page<User> page = userService.listByPage(pageNum);
+    public String listByPage(@PathVariable( name = "pageNum") int pageNum, Model model, @Param("keyword") String keyword){
+        Page<User> page = userService.listByPage(pageNum, keyword);
         List<User> listUsers = page.getContent();
 
         long startCount = (pageNum - 1) * UserService.USERS_PER_PAGE + 1;
@@ -42,6 +43,7 @@ public class UserController {
         model.addAttribute("endCount", endCount);
         model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listUsers", listUsers);
+        model.addAttribute("keyword", keyword);
         return "users";
     }
 

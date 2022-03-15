@@ -31,8 +31,11 @@ public class UserService {
         return (List<User>) userRepository.findAll();
     }
 
-    public Page<User> listByPage(int pageNum){
+    public Page<User> listByPage(int pageNum, String keyword){
         Pageable pageable = PageRequest.of(pageNum - 1, USERS_PER_PAGE);
+        if(keyword != null){
+            return userRepository.findAll(keyword,pageable);
+        }
         return userRepository.findAll(pageable);
     }
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -28,13 +29,13 @@ public class UserController {
     }
 
     @GetMapping("/users/page/{pageNum}")
-    public String listByPage(@PathVariable( name = "pageNum") int pageNum, Model model, @Param("keyword") String keyword){
+    public String listByPage(@PathVariable(name = "pageNum") int pageNum, Model model, @Param("keyword") String keyword) {
         Page<User> page = userService.listByPage(pageNum, keyword);
         List<User> listUsers = page.getContent();
 
         long startCount = (pageNum - 1) * UserService.USERS_PER_PAGE + 1;
         long endCount = startCount + UserService.USERS_PER_PAGE - 1;
-        if(endCount > page.getTotalElements()){
+        if (endCount > page.getTotalElements()) {
             endCount = page.getTotalElements();
         }
         model.addAttribute("currentPage", pageNum);
@@ -61,15 +62,15 @@ public class UserController {
     @PostMapping("/users/save")
     public String saveUser(User user, RedirectAttributes redirectAttributes,
                            @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if(!multipartFile.isEmpty()){
+        if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             user.setPhotos(fileName);
             User savedUser = userService.save(user);
             String uploadDir = "user-photos/" + savedUser.getId();
             FileUploadUtil.cleanDir(uploadDir);
             FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        }else{
-            if(user.getPhotos().isEmpty()) user.setPhotos(null);
+        } else {
+            if (user.getPhotos().isEmpty()) user.setPhotos(null);
             userService.save(user);
         }
 
@@ -92,6 +93,7 @@ public class UserController {
             return "redirect:/users";
         }
     }
+
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable(name = "id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -102,12 +104,21 @@ public class UserController {
         }
         return "redirect:/users";
     }
+
     @GetMapping("/users/{id}/enabled/{status}")
-    public String updateUserEnableStatus(@PathVariable(name = "id") Integer id, @PathVariable(name = "status") boolean enabled, RedirectAttributes redirectAttributes){
-         userService.updateUserEnabledStatus(id, enabled);
-         String status = enabled ? "enabled" : "disabled";
-         String message = "The User ID " + id + " has been " + status;
-         redirectAttributes.addFlashAttribute("message", message);
+    public String updateUserEnableStatus(@PathVariable(name = "id") Integer id, @PathVariable(name = "status") boolean enabled, RedirectAttributes redirectAttributes) {
+        userService.updateUserEnabledStatus(id, enabled);
+        String status = enabled ? "enabled" : "disabled";
+        String message = "The User ID " + id + " has been " + status;
+        redirectAttributes.addFlashAttribute("message", message);
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/export/excel")
+    public void exportToExcel(HttpServletResponse httpServletResponse) throws IOException {
+        List<User> listUsers = userService.listAll();
+
+        UserExcelExporter userExcelExporter = new UserExcelExporter();
+        userExcelExporter.export(listUsers, httpServletResponse);
     }
 }

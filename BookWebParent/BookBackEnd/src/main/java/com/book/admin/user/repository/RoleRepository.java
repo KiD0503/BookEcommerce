@@ -1,4 +1,4 @@
-package com.book.admin.user;
+package com.book.admin.user.repository;
 
 import com.book.common.entity.Role;
 import org.springframework.data.repository.CrudRepository;

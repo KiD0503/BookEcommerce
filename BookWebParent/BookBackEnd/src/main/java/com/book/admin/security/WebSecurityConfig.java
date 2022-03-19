@@ -51,7 +51,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and().logout().permitAll();
     }
-
     @Override
     public void configure(WebSecurity webSecurity) throws Exception{
         webSecurity.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");

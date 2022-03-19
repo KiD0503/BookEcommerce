@@ -1,5 +1,6 @@
-package com.book.admin.user;
+package com.book.admin.user.controller;
 
+import com.book.admin.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PostMapping;

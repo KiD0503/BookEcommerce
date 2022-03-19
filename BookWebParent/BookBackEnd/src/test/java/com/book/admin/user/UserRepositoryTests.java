@@ -1,5 +1,6 @@
 package com.book.admin.user;
 
+import com.book.admin.user.repository.UserRepository;
 import com.book.common.entity.Role;
 import com.book.common.entity.User;
 import org.junit.jupiter.api.Test;

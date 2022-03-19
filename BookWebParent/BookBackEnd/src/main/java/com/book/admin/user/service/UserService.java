@@ -1,5 +1,8 @@
-package com.book.admin.user;
+package com.book.admin.user.service;
 
+import com.book.admin.user.UserNotFoundException;
+import com.book.admin.user.repository.RoleRepository;
+import com.book.admin.user.repository.UserRepository;
 import com.book.common.entity.Role;
 import com.book.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;

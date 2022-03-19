@@ -15,9 +15,9 @@ public class BookUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.getUserByEmail(email);
-        if(user!=null){
+        if (user != null) {
             return new BookUserDetails(user);
         }
-        throw  new UsernameNotFoundException("Could not find user with email: " + email);
+        throw new UsernameNotFoundException("Could not find user with email: " + email);
     }
 }

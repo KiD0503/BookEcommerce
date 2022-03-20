@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymleaf-extras-springsecurity5">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Home - Book Admin</title>
+    <title>403 - Book Admin</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -14,12 +13,15 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div th:replace="navigation :: menu"></div>
-    <div>
-        <h1>Book Control Panel</h1>
-            Welcome <a th:href="@{/account}" sec:authentication="principal.fullname"></a>
-        &nbsp;<span sec:authentication="principal.authorities"></span>
+    <div th:replace="navigation :: menu">
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div><h2 class="text-center ">Sorry, the server has encountered an error while processing your request</h2></div>
 </div>
 </body>
 </html>

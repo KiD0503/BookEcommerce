@@ -39,7 +39,7 @@
     </div>
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
-            <thead class="thead-dark">
+            <thead class="thead-dark text-center">
             <th>User ID</th>
             <th>Photos</th>
             <th>E-mail</th>
@@ -152,29 +152,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $(".link-delete").on("click", function (e) {
-            e.preventDefault();
-            link = $(this);
-            // alert($(this).attr("href"));
-            $("#yesButton").attr("href", link.attr("href"));
-            userId = link.attr("userId")
-            $("#confirmText").text("Are you want to delete this user ID " + userId + "?");
-            $("#confirmModal").modal();
-        })
-    });
-
-    function clearFilter() {
-        window.location = "[[@{/users}]]"
-    }
-
-    $(document).ready(function () {
-        $("#logoutLink").on("click", function (e) {
-            e.preventDefault();
-            document.logoutForm.submit();
-        });
-    });
-</script>
 </body>
 </html>

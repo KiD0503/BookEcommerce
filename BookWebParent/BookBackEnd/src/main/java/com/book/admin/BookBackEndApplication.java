@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan({"com.book.common.entity", "com.book.admin.user"})
+@EntityScan({"com.book.common.entity"})
 public class BookBackEndApplication {
 
     public static void main(String[] args) {
@@ -13,3 +13,4 @@ public class BookBackEndApplication {
     }
 
 }
+

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "categories")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +35,23 @@ public class Category {
     public Category(Integer id) {
         this.id = id;
     }
+
+    public static Category copyIdAndName(Category category) {
+        Category copyCategory = new Category();
+        copyCategory.setId(category.getId());
+        copyCategory.setName(category.getName());
+
+        return copyCategory;
+    }
+
+    public static Category copyIdAndName(Integer id, String name) {
+        Category copyCategory = new Category();
+        copyCategory.setId(id);
+        copyCategory.setName(name);
+
+        return copyCategory;
+    }
+
 
     public Category(String name) {
         this.name = name;
@@ -101,4 +119,5 @@ public class Category {
     public void setChildren(Set<Category> children) {
         this.children = children;
     }
+
 }

@@ -1,5 +1,6 @@
 package com.book.admin.user;
 
+import java.util.List;
 import java.util.Set;
 
 import com.book.admin.user.repository.CategoryRepository;
@@ -67,7 +68,7 @@ public class CategoryRepositoryTests {
             }
         }
     }
-
+    @Test
     private void printChildren(Category parent, int subLevel) {
         int newSubLevel = subLevel + 1;
         Set<Category> children = parent.getChildren();
@@ -81,5 +82,11 @@ public class CategoryRepositoryTests {
 
             printChildren(subCategory, newSubLevel);
         }
+    }
+
+    @Test
+    public void testListCategory(){
+        List<Category> rootCategories = categoryRepository.findRootCategories();
+        rootCategories.forEach(categoryRepository -> System.out.println(categoryRepository.getName()));
     }
 }

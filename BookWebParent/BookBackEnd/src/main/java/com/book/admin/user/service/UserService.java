@@ -1,6 +1,6 @@
 package com.book.admin.user.service;
 
-import com.book.admin.user.UserNotFoundException;
+import com.book.admin.exception.UserNotFoundException;
 import com.book.admin.user.repository.RoleRepository;
 import com.book.admin.user.repository.UserRepository;
 import com.book.common.entity.Role;

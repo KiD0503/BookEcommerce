@@ -1,7 +1,7 @@
 package com.book.admin.user.controller;
 
 import com.book.admin.FileUploadUtil;
-import com.book.admin.user.UserNotFoundException;
+import com.book.admin.exception.UserNotFoundException;
 import com.book.admin.user.service.UserService;
 import com.book.admin.user.export.UserExcelExporter;
 import com.book.common.entity.Role;

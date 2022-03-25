@@ -55,9 +55,12 @@
                 <div class="col-sm-8">
                     <input type="hidden" th:field="*{image}"/>
                     <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
-                           required class="mb-2"/>
+                           th:required="${category.imagePath == null}"
+                           class="mb-2"/>
                     <div class="mt-2">
-                        <img id="thumbnail" alt="Image preview" th:src="@{/images/image-thumbnail.png}"
+                        <img th:if="${category.image != null}" type="hidden" id="thumbnail" alt="Image preview" th:src="@{${category.imagePath}}"
+                             class="img-fluid"/>
+                        <img th:if="${category.image == null}" type="hidden" alt="Image preview" src="/images/image-thumbnail.png"
                              class="img-fluid"/>
                     </div>
                 </div>

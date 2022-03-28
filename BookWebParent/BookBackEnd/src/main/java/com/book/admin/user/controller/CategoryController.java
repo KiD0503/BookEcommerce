@@ -5,6 +5,7 @@ import com.book.admin.exception.CategoryNotFoundException;
 import com.book.admin.user.service.CategoryService;
 import com.book.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -24,9 +25,18 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/categories")
-    public String listAll(Model model){
-        List<Category> listCategories = categoryService.listAll();
+    public String listAll(@Param("sortDir") String sortDir, Model model) {
+        if (sortDir ==  null || sortDir.isEmpty()) {
+            sortDir = "asc";
+        }
+
+        List<Category> listCategories = categoryService.listAll(sortDir);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
         model.addAttribute("listCategories", listCategories);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+
         return "categories/categories";
     }
 

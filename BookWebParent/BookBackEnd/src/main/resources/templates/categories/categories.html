@@ -44,7 +44,10 @@
             <tr class="text-center">
                 <th>ID</th>
                 <th>Category Image</th>
-                <th>Category Name</th>
+                <th>
+                    <a class="text-white" th:href="@{'/categories?sortDir=' + ${reverseSortDir}}">Category Name</a>
+                    <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
+                </th>
                 <th>Alias</th>
                 <th>Enabled</th>
                 <th></th>
@@ -53,7 +56,7 @@
             <tbody>
             <tr th:each="category : ${listCategories}">
                 <td>[[${category.id}]]</td>
-                <td class="text-center" >
+                <td class="text-center">
                     <img th:src="@{${category.imagePath}}" alt="" style="width: 50px">
                 </td>
                 <td>[[${category.name}]]</td>
@@ -70,8 +73,8 @@
                     <a class="fas fa-edit fa-1x icon-green" th:href="@{'/categories/edit/' + ${category.id}}"
                        title="Edit this category"></a>
                     &nbsp;
-                    <a class="fas fa-trash fa-1x icon-red link-delete" th:userId="${category.id}"
-                       th:href="@{'/users/delete/'+ ${category.id}}"
+                    <a class="fas fa-trash fa-1x icon-red link-delete" th:categoryId="${category.id}"
+                       th:href="@{'/categories/delete/'+ ${category.id}}"
                        title="Delete this category"></a>
                 </td>
             </tr>
@@ -98,18 +101,19 @@
 </div>
 <script type="text/javascript" th:src="@{/js/common.js}"></script>
 <script type="text/javascript">
-    // Function confirm delete user
+    // Function confirm delete category
     $(document).ready(function () {
         $(".link-delete").on("click", function (e) {
             e.preventDefault();
             link = $(this);
             // alert($(this).attr("href"));
             $("#yesButton").attr("href", link.attr("href"));
-            categoryId = link.attr("userId")
-            $("#confirmText").text("Are you want to delete this user ID " + categoryId + "?");
+            categoryId = link.attr("categoryId")
+            $("#confirmText").text("Are you want to delete this category ID " + categoryId + "?");
             $("#confirmModal").modal();
         })
     });
+
     //Function clear Filter
     function clearFilter() {
         window.location = "[[@{/categories}]]"

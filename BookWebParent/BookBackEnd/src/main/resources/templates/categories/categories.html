@@ -34,7 +34,7 @@
                     <a class="text-white" th:href="@{'/categories?sortDir=' + ${reverseSortDir}}">Category Name</a>
                     <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}"></span>
                 </th>
-                <th>Alias</th>
+                <th class="hideable-column">Alias</th>
                 <th>Enabled</th>
                 <th></th>
             </tr>
@@ -46,7 +46,7 @@
                     <img th:src="@{${category.imagePath}}" alt="" style="width: 50px">
                 </td>
                 <td>[[${category.name}]]</td>
-                <td>[[${category.alias}]]</td>
+                <td class="hideable-column">[[${category.alias}]]</td>
                 <td class="icon-center">
                     <a th:if="${category.enabled == true}" class="fas fa-check-circle icon-green"
                        th:href="@{'/categories/' + ${category.id} + '/enabled/false'}"
@@ -66,6 +66,31 @@
             </tr>
             </tbody>
         </table>
+    </div>
+    <div class="less-details">
+        <div th:each="category : ${listCategories}" class="row m-1">
+            <div class="col-4" style="text-align: center">
+                <span th:if="${category.image == null}" class="fas fa-user fa-3x"></span>
+                <img th:if="${category.image != null}" th:src="@{${category.imagePath}}" style="width: 100px"/>
+            </div>
+            <div class="col-8">
+                <div>[[${category.name}]]</div>
+                <div class="mt-2">
+                    <a th:if="${category.enabled == true}" class="fas fa-check-circle icon-green"
+                       th:href="@{'/categories/' + ${category.id} + '/enabled/false'}" title="Disable this category"></a>
+                    <a th:if="${category.enabled == false}" class="fas fa-circle icon-dark"
+                       th:href="@{'/categories/' + ${category.id} + '/enabled/true'}" title="Enable this category"></a>
+                    &nbsp;
+                    <a class="fas fa-edit fa-1x icon-green" th:href="@{'/categories/edit/' + ${category.id}}"
+                       title="Edit this category"></a>
+                    &nbsp;
+                    <a class="fas fa-trash fa-1x icon-red link-delete" th:categoryId="${category.id}"
+                       th:href="@{'/categories/delete/'+ ${category.id}}"
+                       title="Delete this category"></a>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </div>
     </div>
     <div class="modal fade text-center" id="confirmModal">
         <div class="modal-dialog">

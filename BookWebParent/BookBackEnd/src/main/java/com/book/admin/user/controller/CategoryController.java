@@ -2,6 +2,7 @@ package com.book.admin.user.controller;
 
 import com.book.admin.FileUploadUtil;
 import com.book.admin.exception.CategoryNotFoundException;
+import com.book.admin.user.export.CategoryCsvExporter;
 import com.book.admin.user.service.CategoryService;
 import com.book.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -115,6 +117,12 @@ public class CategoryController {
         }
 
         return "redirect:/categories";
+    }
+    @GetMapping("/categories/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+        CategoryCsvExporter exporter = new CategoryCsvExporter();
+        exporter.export(listCategories, response);
     }
 
 }

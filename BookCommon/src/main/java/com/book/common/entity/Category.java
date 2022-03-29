@@ -23,7 +23,6 @@ public class Category {
     private boolean enabled;
 
     @OneToOne
-
     @JoinColumn(name = "parent_id")
     private Category parent;
 

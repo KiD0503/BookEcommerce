@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 @EnableJpaRepositories
 public interface ProductRepository extends PagingAndSortingRepository<Product,Integer> {
+
+
 }

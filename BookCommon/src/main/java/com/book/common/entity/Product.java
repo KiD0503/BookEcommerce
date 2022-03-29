@@ -10,7 +10,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(unique = true, length = 256, nullable = false)
+    @Column(unique = true, length = 256, nullable = false, name = "name")
     private String name;
 
     @Column(unique = true, length = 256, nullable = false)
@@ -21,6 +21,9 @@ public class Product {
 
     @Column(length = 4096, nullable = false, name = "full_description" )
     private String fullDescription;
+
+    @Column(length = 256, nullable = false)
+    private String author;
 
     @Column(name = "created_time")
     private Date createdTime;
@@ -35,12 +38,21 @@ public class Product {
 
     private float price;
 
+
     @Column(name = "discount_percent")
     private float discountPercent;
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
     public Integer getId() {
         return id;
@@ -145,4 +157,10 @@ public class Product {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    @Override
+    public String toString() {
+        return "Product [id=" + id + ", name=" + name + "]";
+    }
+
 }

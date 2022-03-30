@@ -3,6 +3,7 @@ package com.book.admin.user.service;
 import com.book.admin.exception.CategoryNotFoundException;
 import com.book.admin.user.repository.CategoryRepository;
 import com.book.common.entity.Category;
+import com.book.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,7 @@ public class CategoryService {
             hierarchicalCategories.add(Category.copyFull(rootCategory));
             Set<Category> children = sortSubCategories(rootCategory.getChildren(), sortDir);
             for (Category subCategory : children){
-                String name = "**" + subCategory.getName();
+                String name = "+ " + subCategory.getName();
                 hierarchicalCategories.add(Category.copyFull(subCategory,name));
                 listSubHierarchicalCategories(hierarchicalCategories, subCategory, 1, sortDir);
             }
@@ -48,7 +49,7 @@ public class CategoryService {
         for (Category subCategory : children){
             String name = "";
             for (int i = 0; i < newSubLevel; i++) {
-                name += "**";
+                name += "+ ";
             }
             name += subCategory.getName();
             hierarchicalCategories.add(Category.copyFull(subCategory,name));
@@ -71,7 +72,7 @@ public class CategoryService {
             Set<Category> children = sortSubCategories(category.getChildren());
 
             for (Category subCategory : children) {
-                String name = "--" + subCategory.getName();
+                String name = "+ " + subCategory.getName();
                 categoriesUsedInForm.add(Category.copyIdAndName(subCategory.getId(), name));
 
                 listSubCategoriesUsedInForm(categoriesUsedInForm, subCategory, 1);
@@ -88,7 +89,7 @@ public class CategoryService {
         for (Category subCategory : children) {
             String name = "";
             for (int i = 0; i < newSubLevel; i++) {
-                name += "**";
+                name += "+ ";
             }
             name += subCategory.getName();
 

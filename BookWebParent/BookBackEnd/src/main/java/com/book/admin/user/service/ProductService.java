@@ -13,7 +13,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public List<Product> listAll(){
+    public List<Product> listAll() {
         return (List<Product>) productRepository.findAll();
     }
 
@@ -32,5 +32,21 @@ public class ProductService {
         product.setUpdatedTime(new Date());
 
         return productRepository.save(product);
+    }
+
+    public String checkUnique(Integer id, String name) {
+        boolean isCreatingNew = (id == null || id == 0);
+        Product productByName = productRepository.findByName(name);
+
+        if (isCreatingNew) {
+            if (productByName != null) return "Duplicate";
+        } else {
+            if (productByName != null && productByName.getId() != id) {
+                return "Duplicate";
+            }
+        }
+
+        return "OK";
+
     }
 }

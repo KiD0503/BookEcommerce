@@ -2,6 +2,8 @@ package com.book.common.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "products")
@@ -41,6 +43,12 @@ public class Product {
 
     @Column(name = "discount_percent")
     private float discountPercent;
+
+    @Column(name = "main_image", nullable = false)
+    private String mainImage;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<ProductImage> images = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "category_id")
@@ -156,6 +164,26 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
+    }
+
+    public Set<ProductImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<ProductImage> images) {
+        this.images = images;
+    }
+
+    public void addExtraImage(String imageName) {
+        this.images.add(new ProductImage(imageName, this));
     }
 
     @Override

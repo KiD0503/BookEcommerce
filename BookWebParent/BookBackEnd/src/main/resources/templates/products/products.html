@@ -41,7 +41,7 @@
             <tr th:each="product : ${listProducts}">
                 <td>[[${product.id}]]</td>
                 <td>
-
+                    <img th:src="@{${product.mainImagePath}}" style="width: 50px" class="img-fluid" />
                 </td>
                 <td>[[${product.name}]]</td>
                 <td>[[${product.author}]]</td>
@@ -89,7 +89,6 @@
         </div>
     </div>
 </div>
-<script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
     // Function confirm delete product
     $(document).ready(function () {

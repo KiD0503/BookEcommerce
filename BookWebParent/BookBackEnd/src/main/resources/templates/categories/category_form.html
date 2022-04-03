@@ -63,7 +63,7 @@
                              th:src="@{${category.imagePath}}"
                              class="img-fluid"/>
                         <img th:if="${category.image == null}" type="hidden" alt="Image preview"
-                             src="/images/image-thumbnail.png"
+                             th:src="@{/images/image-thumbnail.png}"
                              class="img-fluid"/>
                     </div>
                 </div>

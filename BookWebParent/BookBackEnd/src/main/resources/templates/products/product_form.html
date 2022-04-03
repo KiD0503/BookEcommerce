@@ -78,60 +78,17 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $("#buttonCancel").on("click", function () {
-            window.location = "[[@{/products}]]";
-        });
-        $("#fileImage").change(function () {
-            fileSize = this.files[0].size;
-            if (fileSize > 102400) {
-                this.setCustomValidity("You must choose an image less than 102400 Bytes!");
-            } else {
-                this.setCustomValidity("");
-                showImageThumbnail(this);
-            }
-            showImageThumbnail(this);
-        })
-    });
+    MAX_FILE_SIZE = 502400; // 500KB
 
-    $(document).ready(function () {
-        $("#shortDescription").richText();
-        $("#fullDescription").richText();
-    })
-
-    function showImageThumbnail(fileInput) {
-        var file = fileInput.files[0];
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            $("#thumbnail").attr("src", e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-
-    function showModalDialog(title, message) {
-        $("#modalTitle").text(title);
-        $("#modalBody").text(message);
-        $("#modalDialog").modal();
-    }
-
-    function showErrorModal(message) {
-        showModalDialog("Error", message);
-    }
-
-    function showWarningModal(message) {
-        showModalDialog("Warning", message);
-    }
+    moduleURL = "[[@{/products}]]";
+    defaultImageThumbnailSrc = "[[@{/images/image-thumbnail.png}]]";
 
     function checkUnique(form) {
         productId = $("#id").val();
         productName = $("#name").val();
-
         csrfValue = $("input[name='_csrf']").val();
-
         url = "[[@{/products/check_unique}]]";
-
         params = {id: productId, name: productName, _csrf: csrfValue};
-
         $.post(url, params, function (response) {
             if (response == "OK") {
                 form.submit();
@@ -140,13 +97,17 @@
             } else {
                 showErrorModal("Unknown response from server");
             }
-
         }).fail(function () {
             showErrorModal("Could not connect to the server");
         });
-
         return false;
     }
+
+    $(document).ready(function () {
+        $("#shortDescription").richText();
+        $("#fullDescription").richText();
+    })
 </script>
+<script th:src="@{/js/common_form.js}"></script>
 </body>
 </html>

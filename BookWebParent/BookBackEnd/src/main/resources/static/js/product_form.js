@@ -9,6 +9,9 @@ $(document).ready(function() {
         extraImagesCount++;
 
         $(this).change(function() {
+            if (!checkFileSize(this)) {
+                return;
+            }
             showExtraImageThumbnail(this, index);
         });
     });

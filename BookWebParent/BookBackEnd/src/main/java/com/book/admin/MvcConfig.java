@@ -3,7 +3,7 @@ package com.book.admin;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-//Config photos of user
+//Config photos
 import java.nio.file.Path;
 import java.nio.file.Paths;
 

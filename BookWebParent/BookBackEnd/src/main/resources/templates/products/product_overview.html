@@ -35,9 +35,10 @@
                     </th:block>
                 </select>
             </th:block>
+
             <th:block th:if="${product.category == null}">
             <select th:field="*{category}" class="form-control" required>
-                <th:block th:each="category : ${listedCategories}">
+                <th:block th:each="category : ${listCategories}">
                     <option th:value="${category.id}">[[${category.name}]]</option>
                 </th:block>
             </select>

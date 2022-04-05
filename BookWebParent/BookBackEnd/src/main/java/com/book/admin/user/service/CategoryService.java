@@ -28,6 +28,9 @@ public class CategoryService {
 
         return listHierarchicalCategories(rootCategories, sortDir);
     }
+    public List<Category> listAll(){
+        return (List<Category>) categoryRepository.findAll();
+    }
 
     private List<Category> listHierarchicalCategories(List<Category> rootCategories, String sortDir){
         List<Category> hierarchicalCategories = new ArrayList<>();

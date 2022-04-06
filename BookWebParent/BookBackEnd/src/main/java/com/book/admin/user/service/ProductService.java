@@ -92,4 +92,13 @@ public class ProductService {
             throw new ProductNotFoundException("Could not find any product with ID " + id);
         }
     }
+
+    public void saveProductPrice(Product productInForm) {
+        Product productInDB = productRepository.findById(productInForm.getId()).get();
+        productInDB.setCost(productInForm.getCost());
+        productInDB.setPrice(productInForm.getPrice());
+        productInDB.setDiscountPercent(productInForm.getDiscountPercent());
+
+        productRepository.save(productInDB);
+    }
 }

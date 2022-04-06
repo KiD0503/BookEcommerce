@@ -4,6 +4,10 @@ import com.book.admin.exception.ProductNotFoundException;
 import com.book.admin.user.repository.ProductRepository;
 import com.book.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,11 +18,25 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class ProductService {
+
+    public static final int PRODUCTS_PER_PAGE = 6;
+
     @Autowired
     private ProductRepository productRepository;
 
     public List<Product> listAll() {
         return (List<Product>) productRepository.findAll();
+    }
+
+    public Page<Product> listByPage(int pageNum, String keyword) {
+
+        Pageable pageable = PageRequest.of(pageNum - 1, PRODUCTS_PER_PAGE);
+
+        if (keyword != null) {
+            return productRepository.findAll(keyword, pageable);
+        }
+
+        return productRepository.findAll(pageable);
     }
 
     public Product save(Product product) {

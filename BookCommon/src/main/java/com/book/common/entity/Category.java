@@ -1,9 +1,11 @@
 package com.book.common.entity;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
-
+//@EntityScan("com.book.common.entity.Category")
 @Entity
 @Table(name = "categories")
 public class Category {

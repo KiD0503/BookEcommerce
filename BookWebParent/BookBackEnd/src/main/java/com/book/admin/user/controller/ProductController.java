@@ -118,14 +118,14 @@ public class ProductController {
                                     MultipartFile[] extraImageMultiparts, Product savedProduct) throws IOException {
         if (!mainImageMultipart.isEmpty()) {
             String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
-            String uploadDir = "product-images/" + savedProduct.getId();
+            String uploadDir = "../product-images/" + savedProduct.getId();
 
             FileUploadUtil.cleanDir(uploadDir);
             FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
         }
 
         if (extraImageMultiparts.length > 0) {
-            String uploadDir = "product-images/" + savedProduct.getId() + "/extras";
+            String uploadDir = "../product-images/" + savedProduct.getId() + "/extras";
 
             for (MultipartFile multipartFile : extraImageMultiparts) {
                 if (multipartFile.isEmpty()) continue;
@@ -137,7 +137,7 @@ public class ProductController {
     }
 
     private void deleteExtraImagesWeredRemovedOnForm(Product product) {
-        String extraImageDir = "product-images/" + product.getId() + "/extras";
+        String extraImageDir = "../product-images/" + product.getId() + "/extras";
         Path dirPath = Paths.get(extraImageDir);
 
         try {

@@ -1,6 +1,7 @@
 package com.book.service;
 
 import com.book.common.entity.Product;
+import com.book.common.exception.ProductNotFoundException;
 import com.book.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,5 +22,14 @@ public class ProductService {
 
         return productRepository.listByCategory(categoryId, categoryIdMatch, pageable);
 
+    }
+
+    public Product getProduct(String alias) throws ProductNotFoundException {
+        Product product = productRepository.findByAlias(alias);
+        if (product == null) {
+            throw new ProductNotFoundException("Could not find any product with alias " + alias);
+        }
+
+        return product;
     }
 }

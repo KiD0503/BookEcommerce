@@ -1,9 +1,8 @@
 package com.book.admin.user.service;
 
-import com.book.admin.exception.CategoryNotFoundException;
+import com.book.common.exception.CategoryNotFoundException;
 import com.book.admin.user.repository.CategoryRepository;
 import com.book.common.entity.Category;
-import com.book.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,7 @@
 package com.book.admin.user.controller;
 
 import com.book.admin.FileUploadUtil;
-import com.book.admin.exception.ProductNotFoundException;
+import com.book.common.exception.ProductNotFoundException;
 import com.book.admin.security.BookUserDetails;
 import com.book.admin.user.service.CategoryService;
 import com.book.admin.user.service.ProductService;

@@ -1,7 +1,6 @@
 package com.book.common.entity;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-
+import javax.persistence.OrderBy;
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -32,6 +31,7 @@ public class Category {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
+    @OrderBy("name asc")
     private Set<Category> children = new HashSet<>();
 
     public Category() {

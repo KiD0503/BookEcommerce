@@ -1,4 +1,4 @@
-package com.book.admin.exception;
+package com.book.common.exception;
 
 public class ProductNotFoundException extends Exception {
     public ProductNotFoundException(String message) {

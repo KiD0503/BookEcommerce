@@ -1,10 +1,10 @@
 package com.book.admin.user.controller;
 
 import com.book.admin.FileUploadUtil;
-import com.book.admin.exception.CategoryNotFoundException;
 import com.book.admin.user.export.CategoryCsvExporter;
 import com.book.admin.user.service.CategoryService;
 import com.book.common.entity.Category;
+import com.book.common.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;

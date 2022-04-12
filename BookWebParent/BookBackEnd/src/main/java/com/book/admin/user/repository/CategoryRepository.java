@@ -24,6 +24,8 @@ public interface CategoryRepository extends PagingAndSortingRepository<Category,
 
     public Category findByName(String name);
 
+    public Category findByImage(String image);
+
     public Category findByAlias(String alias);
 
     @Query("UPDATE Category c SET c.enabled = ?2 WHERE c.id = ?1")

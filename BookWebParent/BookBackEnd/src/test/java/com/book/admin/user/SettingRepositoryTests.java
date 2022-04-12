@@ -23,10 +23,8 @@ public class SettingRepositoryTests {
     @Test
     public void testCreateGeneralSettings() {
         Setting siteName = new Setting("SITE_NAME", "KidBook", SettingCategory.GENERAL);
-        Setting siteLogo = new Setting("SITE_LOGO", "logo.png", SettingCategory.GENERAL);
-        Setting copyright = new Setting("COPYRIGHT", "Copyright (C) 2021 KidBook Ltd.", SettingCategory.GENERAL);
 
-        settingRepository.saveAll(List.of(siteName, siteLogo, copyright));
+        settingRepository.saveAll(List.of(siteName));
 
         Iterable<Setting> iterable = settingRepository.findAll();
 

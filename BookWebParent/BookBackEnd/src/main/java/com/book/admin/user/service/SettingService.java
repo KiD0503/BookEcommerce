@@ -20,7 +20,9 @@ public class SettingService {
     }
 
     public GeneralSettingBag getGeneralSettings() {
-        List<Setting> settings = new ArrayList<>();
+        List<Setting> settings = new ArrayList<>(
+
+        );
         List<Setting> generalSettings = settingRepository.findByCategory(SettingCategory.GENERAL);
         List<Setting> currencySettings = settingRepository.findByCategory(SettingCategory.CURRENCY);
 

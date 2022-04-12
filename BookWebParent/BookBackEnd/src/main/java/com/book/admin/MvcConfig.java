@@ -40,6 +40,7 @@ public class MvcConfig implements WebMvcConfigurer {
         exposeDirectory("../category-images", registry);
         exposeDirectory("../product-images", registry);
         exposeDirectory("../site-logo", registry);
+
     }
 
 }

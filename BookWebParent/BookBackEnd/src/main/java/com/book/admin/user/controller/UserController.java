@@ -90,7 +90,7 @@ public class UserController {
             model.addAttribute("user", user);
             model.addAttribute("listRoles", listRoles);
             model.addAttribute("pageTitle", "Edit User (ID: " + id + ")");
-            return "user_form";
+            return "users/user_form";
         } catch (UserNotFoundException exception) {
             redirectAttributes.addFlashAttribute("message", exception.getMessage());
             return "redirect:/users";

@@ -2,8 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Setting - Kid Book</title>
-    <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}" />
-    <script th:src="@{/richtext/jquery.richtext.min.js}"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>403 - Book Admin</title>
@@ -13,6 +11,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+    <link rel="stylesheet" th:href="@{/richtext/css/richtext.min.css}"/>
+    <script type="text/javascript" th:src="@{/richtext/js/jquery.richtext.min.js}"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -34,7 +34,7 @@
                 <a class="nav-link" data-toggle="tab" href="#mailServer" role="tab">Mail Server</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" data-toggle="tab" href="#mailTemplate" role="tab">Mail Templates</a>
+                <a class="nav-link" data-toggle="tab" href="#mailTemplates" role="tab">Mail Templates</a>
             </li>
         </ul>
 
@@ -42,23 +42,22 @@
             <div class="tab-pane active p-3" id="general" role="tabpanel">
                 <div th:replace="settings/general :: content" />
             </div>
-            <div class="tab-pane" id="countries" role="tabpanel">
-                <h2>Countries</h2>
-            </div>
-            <div class="tab-pane" id="states" role="tabpanel">
-                <h2>States</h2>
-            </div>
             <div class="tab-pane p-3" id="mailServer" role="tabpanel">
-                <h2>Mail Server</h2>
+                <div th:replace="settings/mail_server :: content"></div>
             </div>
             <div class="tab-pane p-3" id="mailTemplates" role="tabpanel">
-                <h2>Mail Templates</h2>
+                <div th:replace="settings/mail_templates/mail_templates :: content"></div>
             </div>
         </div>
     </div>
 </div>
 <script type="text/javascript">
     MAX_FILE_SIZE = 102400; // 100KB
+</script>
+<script>
+    $(document).ready(function() {
+        $("#customerVerificationContent").richText();
+    });
 </script>
 <script th:src="@{/js/common_form.js}"></script>
 </body>

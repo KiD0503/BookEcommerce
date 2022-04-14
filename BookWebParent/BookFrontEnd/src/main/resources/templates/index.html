@@ -10,8 +10,8 @@
         <h1>Shopping by Categories</h1>
     </div>
     <div class="row">
-        <div class="col-sm-2" th:each="category : ${listCategories}">
-            <div><img th:src="@{${category.imagePath}}" width="80"></div>
+        <div class="col" th:each="category : ${listCategories}">
+            <div><img th:src="@{${category.imagePath}}" width="70"></div>
             <div>
                 <a th:href="@{'/c/' + ${category.alias}}">[[${category.name}]]</a>
             </div>

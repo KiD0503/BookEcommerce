@@ -12,7 +12,7 @@
         <th:block th:each="category : ${category.children}">
             <div class="col" th:if="${category.enabled == true}">
                 <a th:href="@{'/c/' + ${category.alias}}">
-                    <img th:src="@{${category.imagePath}}" height="100" />
+                    <img th:src="@{${category.imagePath}}" height="70" />
                     <br/>
                     <b>[[${category.name}]]</b>
                 </a>

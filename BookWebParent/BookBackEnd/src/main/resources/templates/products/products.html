@@ -18,8 +18,8 @@
     <div>
         <h2>Manage Products</h2>
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-        <a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
-        <a th:href="@{/products/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
+            <a th:href="@{/products/new}" class="fas fa-folder-plus fa-2x icon-dark mr-2"></a>
+            <a th:href="@{/products/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
         </th:block>
     </div>
     <br>
@@ -50,7 +50,7 @@
                 <th>Author</th>
                 <th>Category</th>
                 <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                <th>Enabled</th>
+                    <th>Enabled</th>
                 </th:block>
                 <th></th>
             </tr>
@@ -70,14 +70,14 @@
                 <td>[[${product.author}]]</td>
                 <td>[[${product.category.name}]]</td>
                 <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                <td class="icon-center">
-                    <a th:if="${product.enabled == true}" class="fas fa-check-circle icon-green"
-                       th:href="@{'/products/' + ${product.id} + '/enabled/false'}"
-                       title="Disable this product"></a>
-                    <a th:if="${product.enabled == false}" class="fas fa-circle icon-dark"
-                       th:href="@{'/products/' + ${product.id} + '/enabled/true'}"
-                       title="Enable this product"></a>
-                </td>
+                    <td class="icon-center">
+                        <a th:if="${product.enabled == true}" class="fas fa-check-circle icon-green"
+                           th:href="@{'/products/' + ${product.id} + '/enabled/false'}"
+                           title="Disable this product"></a>
+                        <a th:if="${product.enabled == false}" class="fas fa-circle icon-dark"
+                           th:href="@{'/products/' + ${product.id} + '/enabled/true'}"
+                           title="Enable this product"></a>
+                    </td>
                 </th:block>
                 <td class="icon-center">
                     <a class="fas fa-file-alt icon-green link-detail"
@@ -85,16 +85,16 @@
                        title="View details of this product"
                     ></a>
                     <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
-                    &nbsp;
-                    <a class="fas fa-edit fa-1x icon-green" th:href="@{'/products/edit/' + ${product.id}}"
-                       title="Edit this product"></a>
+                        &nbsp;
+                        <a class="fas fa-edit fa-1x icon-green" th:href="@{'/products/edit/' + ${product.id}}"
+                           title="Edit this product"></a>
                     </th:block>
 
                     <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                    &nbsp;
-                    <a class="fas fa-trash fa-1x icon-red link-delete" th:productId="${product.id}"
-                       th:href="@{'/products/delete/'+ ${product.id}}"
-                       title="Delete this product"></a>
+                        &nbsp;
+                        <a class="fas fa-trash fa-1x icon-red link-delete" th:productId="${product.id}"
+                           th:href="@{'/products/delete/'+ ${product.id}}"
+                           title="Delete this product"></a>
                     </th:block>
                 </td>
             </tr>
@@ -104,7 +104,7 @@
     <div class="less-details">
         <div th:each="product : ${listProducts}" class="row m-1">
             <div class="col-4">
-                <img th:src="@{${product.mainImagePath}}" style="width: 80px" class="img-fluid" />
+                <img th:src="@{${product.mainImagePath}}" style="width: 80px" class="img-fluid"/>
             </div>
             <div class="col-8">
                 <div>
@@ -133,57 +133,57 @@
     </div>
 
     <div class="text-center m-1" th:if="${totalItems > 0}">
-    <span>Showing products # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
-</div>
-<div class="text-center m-1" th:unless="${totalItems > 0}">
-    <span>No products found</span>
-</div>
-<div th:if="${totalItems>0}">
-    <nav>
-        <ul class="pagination justify-content-center">
-            <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                <a class="page-link" th:href="@{/products/page/1}">First</a>
-            </li>
-            <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                <a class="page-link" th:href="@{'/products/page/' + ${currentPage - 1}}">Previous</a>
-            </li>
-            <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
-                th:each="i : ${#numbers.sequence(1,totalPages)}">
-                <a class="page-link" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>
-            </li>
-            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                <a class="page-link" th:href="@{'/products/page/' + ${currentPage + 1}}">Next</a>
-            </li>
-            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                <a class="page-link" th:href="@{'/products/page/' + ${totalPages}}">Last</a>
-            </li>
-        </ul>
-    </nav>
-</div>
-<div class="modal fade text-center" id="confirmModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modalTitle">Delete Confirmation</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <span>Showing products # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+    </div>
+    <div class="text-center m-1" th:unless="${totalItems > 0}">
+        <span>No products found</span>
+    </div>
+    <div th:if="${totalItems>0}">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{/products/page/1}">First</a>
+                </li>
+                <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/products/page/' + ${currentPage - 1}}">Previous</a>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item' : 'page-item active'}"
+                    th:each="i : ${#numbers.sequence(1,totalPages)}">
+                    <a class="page-link" th:href="@{'/products/page/' + ${i}}">[[${i}]]</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/products/page/' + ${currentPage + 1}}">Next</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/products/page/' + ${totalPages}}">Last</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalTitle">Delete Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <span id="confirmText"></span>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-success" href="" id="yesButton">Yes</a>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <span id="confirmText"></span>
-            </div>
-            <div class="modal-footer">
-                <a class="btn btn-success" href="" id="yesButton">Yes</a>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+        </div>
+    </div>
+    <div class="modal fade" id="detailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
             </div>
         </div>
     </div>
 </div>
-<div class="modal fade" id="detailModal">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-        </div>
-    </div>
-</div>
-
 <script type="text/javascript">
     // Function confirm delete product
     $(document).ready(function () {

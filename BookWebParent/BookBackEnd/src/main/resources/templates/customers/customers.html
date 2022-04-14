@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Home - Book Admin</title>
+    <title>[[${pageTitle}]]</title>
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/4.3.1/css/bootstrap.min.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/3.4.1/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
@@ -15,16 +15,16 @@
 <div class="container-fluid">
     <div th:replace="navigation :: menu"></div>
     <div>
-        <h2>Manage Users</h2>
-        <a th:href="@{/users/new}" class="fas fa-user-plus fa-2x icon-dark"></a>
-        &nbsp;&nbsp;
-        <a th:href="@{/users/export/excel}" class="fas fa-file-excel fa-2x icon-dark"></a>
+        <h2>Manage Customers</h2>
+
+        <a th:href="@{/customers/export/csv}" class="fas fa-file-csv fa-2x icon-dark mr-2"></a>
     </div>
+
     <div th:if="${message != null}" class="alert alert-success text-center">
-        [[ ${message}]]
+        [[${message}]]
     </div>
     <div>
-        <form th:action="@{/users/page/1}" class="form-inline m-3">
+        <form th:action="@{/customers/page/1}" class="form-inline m-3">
             Filter &nbsp;
             <input type="search" name="keyword" class="form-control" required/>
             &nbsp;&nbsp;
@@ -39,75 +39,74 @@
     </div>
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
-            <thead class="thead-dark text-center">
-            <th>User ID</th>
-            <th>Photos</th>
-            <th>E-mail</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Roles</th>
-            <th>Enabled</th>
-            <th></th>
+            <thead class="thead-dark">
+            <tr class="text-center">
+                <th>ID</th>
+                <th>First Name</th>
+                <th>LastName</th>
+                <th>E-mail</th>
+                <th>Enabled</th>
+                <th></th>
+            </tr>
             </thead>
             <tbody>
-            <tr th:each="user: ${listUsers}">
-                <td>[[${user.id}]]</td>
+            <tr th:each="customer : ${listCustomers}">
+                <td class="text-center">[[${customer.id}]]</td>
+                <td class="text-center">[[${customer.firstName}]]</td>
+                <td class="text-center">[[${customer.lastName}]]</td>
+                <td class="hideable-column">[[${customer.email}]]</td>
                 <td class="icon-center">
-                    <span th:if="${user.photos == null}" class="fas fa-user fa-2x"></span>
-                    <img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style="width: 50px"/>
-
+                    <a th:if="${customer.enabled == true}" class="fas fa-check-circle icon-green"
+                       th:href="@{'/customers/' + ${customer.id} + '/enabled/false'}" title="Disable this customer"></a>
+                    <a th:if="${customer.enabled == false}" class="fas fa-circle icon-dark"
+                       th:href="@{'/customers/' + ${customer.id} + '/enabled/true'}" title="Enable this customer"></a>
                 </td>
-                <td>[[${user.email}]]</td>
-                <td>[[${user.firstName}]]</td>
-                <td>[[${user.lastName}]]</td>
-                <td>[[${user.roles}]]</td>
                 <td class="icon-center">
-                    <a th:if="${user.enabled == true}" class="fas fa-check-circle icon-green"
-                       th:href="@{'/users/' + ${user.id} + '/enabled/false'}" title="Disable this user"></a>
-                    <a th:if="${user.enabled == false}" class="fas fa-circle icon-dark"
-                       th:href="@{'/users/' + ${user.id} + '/enabled/true'}" title="Enable this user"></a>
-                </td>
-
-
-                <td class="icon-center">
-                    <a class="fas fa-edit fa-1x icon-green" th:href="@{'/users/edit/' + ${user.id}}"
-                                           title="Edit this user"></a>
+                    <a class="fas fa-file-alt fa-1x icon-green link-detail"
+                       th:href="@{'/customers/detail/' + ${customer.id}}"
+                       title="View details of this customer"
+                    ></a>
+                    &nbsp;
+                    <a class="fas fa-edit fa-1x icon-green" th:href="@{'/customers/edit/' + ${customer.id}}"
+                       title="Edit this user"></a>
                     &nbsp;
                     <a class="fas fa-trash fa-1x icon-red link-delete"
-                       th:userId="${user.id}"
-                       th:href="@{'/users/delete/'+ ${user.id}}"
-                       title="Delete this user"></a>
-                </td>
+                       th:userId="${customer.id}"
+                       th:href="@{'/customers/delete/'+ ${customer.id}}"
+                       title="Delete this customer"></a>                </td>
             </tr>
             </tbody>
         </table>
     </div>
+
     <div class="less-details">
-        <div th:each="user : ${listUsers}" class="row m-1">
-            <div class="col-4" style="text-align: center">
-                <span th:if="${user.photos == null}" class="fas fa-user fa-3x"></span>
-                <img th:if="${user.photos != null}" th:src="@{${user.photosImagePath}}" style="width: 100px"/>
+        <div th:each="customer : ${listCustomers}" class="row m-1">
+            <div class="col-4">
+                <span><b>[[${customer.fullName}]]</b></span>
             </div>
             <div class="col-8">
-                <div>[[${user.fullName}]]</div>
-                <div>[[${user.roles}]]</div>
-                <div class="mt-2">
-                    <a th:if="${user.enabled == true}" class="fas fa-check-circle icon-green"
-                       th:href="@{'/users/' + ${user.id} + '/enabled/false'}" title="Disable this user"></a>
-                    <a th:if="${user.enabled == false}" class="fas fa-circle icon-dark"
-                       th:href="@{'/users/' + ${user.id} + '/enabled/true'}" title="Enable this user"></a>
+                <div>
+                    <a th:if="${customer.enabled == true}" class="fas fa-check-circle icon-green"
+                       th:href="@{'/customers/' + ${customer.id} + '/enabled/false'}" title="Disable this customer"></a>
+                    <a th:if="${customer.enabled == false}" class="fas fa-circle icon-dark"
+                       th:href="@{'/customers/' + ${customer.id} + '/enabled/true'}" title="Enable this customer"></a>
                     &nbsp;
-                    <a class="fas fa-edit fa-1x icon-green" th:href="@{'/users/edit/' + ${user.id}}"
-                       title="Edit this user"></a>
+                    <a class="fas fa-file-alt fa-1x icon-green link-detail"
+                       th:href="@{'/customers/detail/' + ${customer.id}}"
+                       title="View details of this customer"
+                    ></a>
                     &nbsp;
-                    <a class="fas fa-trash fa-1x icon-red link-delete" th:userId="${user.id}"
-                       th:href="@{'/users/delete/'+ ${user.id}}"
-                       title="Delete this user"></a>
+                    <a class="fas fa-edit fa-1x icon-green" th:href="@{'/customers/edit/' + ${customer.id}}"
+                       title="Edit this customer"></a>                    &nbsp;
+                    <a class="fas fa-trash fa-1x icon-red link-delete" th:customerId="${customer.id}"
+                       th:href="@{'/customers/delete/'+ ${customer.id}}"
+                       title="Delete this customer"></a>
                 </div>
             </div>
             <div>&nbsp;</div>
         </div>
     </div>
+
     <div class="text-center m-1" th:if="${totalItems > 0}">
         <span>Showing users # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
     </div>
@@ -153,24 +152,37 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="detailModal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
 </div>
+<script th:src="@{/js/common_form.js}"></script>
 <script type="text/javascript">
-    // Function confirm delete user
-    $(document).ready(function () {
-        $(".link-delete").on("click", function (e) {
+    moduleURL = "[[@{/customers}]]";
+
+    $(document).ready(function() {
+        $(document).ready(function () {
+            $(".link-delete").on("click", function (e) {
+                e.preventDefault();
+                link = $(this);
+                // alert($(this).attr("href"));
+                $("#yesButton").attr("href", link.attr("href"));
+                customerId = link.attr("customerId")
+                $("#confirmText").text("Are you want to delete this customer?");
+                $("#confirmModal").modal();
+            })
+        });
+
+        $(".link-detail").on("click", function(e) {
             e.preventDefault();
-            link = $(this);
-            // alert($(this).attr("href"));
-            $("#yesButton").attr("href", link.attr("href"));
-            userId = link.attr("userId")
-            $("#confirmText").text("Are you want to delete this user ID " + userId + "?");
-            $("#confirmModal").modal();
-        })
+            linkDetailURL = $(this).attr("href");
+            $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
     });
-    //Function clear Filter
-    function clearFilter() {
-        window.location = "[[@{/users}]]"
-    }
 </script>
 </body>
 </html>

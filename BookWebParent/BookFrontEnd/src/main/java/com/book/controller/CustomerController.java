@@ -37,7 +37,6 @@ public class CustomerController {
                                  HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
         customerService.registerCustomer(customer);
         sendVerificationEmail(request, customer);
-
         model.addAttribute("pageTitle", "Registration Succeeded!");
 
         return "/register/register_success";

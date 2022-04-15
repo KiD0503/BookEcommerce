@@ -1,5 +1,6 @@
 package com.book.repository;
 
+import com.book.common.entity.AuthenticationType;
 import com.book.common.entity.Customer;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -18,4 +19,8 @@ public interface CustomerRepository extends CrudRepository<Customer, Integer> {
     @Query("UPDATE Customer c SET c.enabled = true, c.verificationCode = null WHERE c.id = ?1")
     @Modifying
     public void enable(Integer id);
+
+    @Query("UPDATE Customer c SET c.authenticationType = ?2 WHERE c.id = ?1")
+    @Modifying
+    public void updateAuthenticationType(Integer customerId, AuthenticationType type);
 }

@@ -1,5 +1,6 @@
 package com.book.service;
 
+import com.book.common.entity.AuthenticationType;
 import com.book.common.entity.Customer;
 import com.book.repository.CustomerRepository;
 import net.bytebuddy.utility.RandomString;
@@ -29,10 +30,15 @@ public class CustomerService {
         encodePassword(customer);
         customer.setEnabled(false);
         customer.setCreatedTime(new Date());
+        customer.setAuthenticationType(AuthenticationType.DATABASE);
         String randomCode = RandomString.make(64);
         customer.setVerificationCode(randomCode);
 
         customerRepository.save(customer);
+    }
+
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findByEmail(email);
     }
 
     private void encodePassword(Customer customer) {
@@ -50,4 +56,41 @@ public class CustomerService {
             return true;
         }
     }
+
+    public void updateAuthenticationType(Customer customer, AuthenticationType type) {
+        if (!customer.getAuthenticationType().equals(type)) {
+            customerRepository.updateAuthenticationType(customer.getId(), type);
+        }
+    }
+
+    public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode) {
+        Customer customer = new Customer();
+        customer.setEmail(email);
+        setName(name, customer);
+
+        customer.setEnabled(true);
+        customer.setCreatedTime(new Date());
+        customer.setAuthenticationType(AuthenticationType.GOOGLE);
+        customer.setPassword("");
+        customer.setAddressLine("");
+        customer.setCity("");
+        customer.setPhoneNumber("");
+
+        customerRepository.save(customer);
+    }
+
+    private void setName(String name, Customer customer) {
+        String[] nameArray = name.split(" ");
+        if (nameArray.length < 2) {
+            customer.setFirstName(name);
+            customer.setLastName("");
+        } else {
+            String firstName = nameArray[0];
+            customer.setFirstName(firstName);
+
+            String lastName = name.replaceFirst(firstName, "");
+            customer.setLastName(lastName);
+        }
+    }
+
 }

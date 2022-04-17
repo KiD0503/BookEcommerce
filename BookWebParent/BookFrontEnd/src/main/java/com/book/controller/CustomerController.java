@@ -87,7 +87,7 @@ public class CustomerController {
 
     @GetMapping("/account_details")
     public String viewAccountDetails(Model model, HttpServletRequest request) {
-        String email = getEmailOfAuthenticatedCustomer(request);
+        String email = Utility.getEmailOfAuthenticatedCustomer(request);
         Customer customer = customerService.getCustomerByEmail(email);
         model.addAttribute("customer", customer);
         return "customer/account_form";
@@ -107,6 +107,7 @@ public class CustomerController {
         }
         return customerEmail;
     }
+
 
     @PostMapping("/update_account_details")
     public String updateAccountDetails(Model model, Customer customer, RedirectAttributes ra,

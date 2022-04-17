@@ -107,6 +107,13 @@ public class Product {
         return createdTime;
     }
 
+    public Product(Integer id) {
+        this.id = id;
+    }
+
+    public Product() {
+    }
+
     public void setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
     }

@@ -34,6 +34,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         if (customer == null) {
             customerService.addNewCustomerUponOAuthLogin(name, email, countryCode);
         } else {
+            oauth2User.setFullName(customer.getFullName());
             customerService.updateAuthenticationType(customer, AuthenticationType.GOOGLE);
         }
 

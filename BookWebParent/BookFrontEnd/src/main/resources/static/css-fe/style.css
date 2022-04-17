@@ -58,9 +58,31 @@
     background: #333333;
     transform: scale(0, 1);
     transform-origin: right top;
-    transition: transform .3s;
+    transition: transform .6s;
 }
 .under-a-black:hover::after {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.under-a-blue {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+}
+.under-a-blue::after {
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: #0099FF;
+    transform: scale(0, 1);
+    transform-origin: right top;
+    transition: transform .6s;
+}
+.under-a-blue:hover::after {
     transform-origin: left top;
     transform: scale(1, 1);
 }

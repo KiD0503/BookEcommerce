@@ -167,4 +167,18 @@ public class Customer {
         this.resetPasswordToken = resetPasswordToken;
     }
 
+    @Transient
+    public String getAddress() {
+        String address = firstName;
+
+        if (lastName != null && !lastName.isEmpty()) address += " " + lastName;
+
+        if (!addressLine.isEmpty()) address += ", " + addressLine;
+
+        if (!city.isEmpty()) address += ", " + city;
+
+        if (!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
+
+        return address;
+    }
 }

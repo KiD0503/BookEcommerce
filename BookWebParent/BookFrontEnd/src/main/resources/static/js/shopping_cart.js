@@ -66,9 +66,8 @@ function updateSubtotal(updatedSubtotal, productId) {
 }
 
 function updateTotal() {
-    total = 0.0
+    total = 0.0;
     productCount = 0;
-
 
     $(".subtotal").each(function(index, element) {
         productCount++;
@@ -80,6 +79,7 @@ function updateTotal() {
     } else {
         $("#total").text(formatCurrency(total));
     }
+
 }
 
 function showEmptyShoppingCart() {
@@ -119,6 +119,7 @@ function updateCountNumbers() {
         element.innerHTML = "" + (index + 1);
     });
 }
+
 
 function formatCurrency(amount) {
     return $.number(amount, decimalDigits, decimalSeparator, thousandsSeparator);

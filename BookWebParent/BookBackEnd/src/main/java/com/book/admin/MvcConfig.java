@@ -1,11 +1,14 @@
 package com.book.admin;
 
+import com.book.admin.user.paging.PagingAndSortingArgumentResolver;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //Config photos
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
@@ -43,4 +46,8 @@ public class MvcConfig implements WebMvcConfigurer {
 
     }
 
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
+        resolvers.add(new PagingAndSortingArgumentResolver());
+    }
 }

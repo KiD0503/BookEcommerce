@@ -9,6 +9,7 @@ public class CheckoutInfo {
     private float shippingCostTotal;
     private float paymentTotal;
     private int deliverDays;
+    private boolean codSupported;
 
     public float getProductCost() {
         return productCost;
@@ -56,4 +57,13 @@ public class CheckoutInfo {
 
         return calendar.getTime();
     }
+
+    public boolean isCodSupported() {
+        return codSupported;
+    }
+
+    public void setCodSupported(boolean codSupported) {
+        this.codSupported = codSupported;
+    }
+
 }

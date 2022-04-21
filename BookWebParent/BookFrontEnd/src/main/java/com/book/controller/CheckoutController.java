@@ -5,14 +5,12 @@ import com.book.common.entity.CartItem;
 import com.book.common.entity.Customer;
 import com.book.other.CheckoutInfo;
 import com.book.other.Utility;
-import com.book.service.AddressService;
-import com.book.service.CheckoutService;
-import com.book.service.CustomerService;
-import com.book.service.ShoppingCartService;
+import com.book.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -25,6 +23,8 @@ public class CheckoutController {
     @Autowired private CustomerService customerService;
     @Autowired private AddressService addressService;
     @Autowired private ShoppingCartService cartService;
+    @Autowired private OrderService orderService;
+
 
     @GetMapping("/checkout")
     public String showCheckoutPage(Model model, HttpServletRequest request) {
@@ -51,5 +51,20 @@ public class CheckoutController {
     private Customer getAuthenticatedCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         return customerService.getCustomerByEmail(email);
+    }
+    @PostMapping("/place_order")
+    public String placeOrder(HttpServletRequest request) {
+
+        Customer customer = getAuthenticatedCustomer(request);
+
+        Address defaultAddress = addressService.getDefaultAddress(customer);
+
+        List<CartItem> cartItems = cartService.listCartItems(customer);
+        CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems);
+
+        orderService.createOrder(customer, defaultAddress, cartItems, checkoutInfo);
+        cartService.deleteByCustomer(customer);
+
+        return "checkout/order_completed";
     }
 }

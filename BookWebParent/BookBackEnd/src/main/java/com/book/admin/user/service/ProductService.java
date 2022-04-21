@@ -1,5 +1,6 @@
 package com.book.admin.user.service;
 
+import com.book.admin.user.paging.PagingAndSortingHelper;
 import com.book.common.exception.ProductNotFoundException;
 import com.book.admin.user.repository.ProductRepository;
 import com.book.common.entity.Product;
@@ -37,6 +38,14 @@ public class ProductService {
 
         return productRepository.findAll(pageable);
     }
+
+    public void searchProducts(int pageNum, PagingAndSortingHelper helper) {
+        Pageable pageable = helper.createPageable(PRODUCTS_PER_PAGE, pageNum);
+        String keyword = helper.getKeyword();
+        Page<Product> page = productRepository.searchProductsByName(keyword, pageable);
+        helper.updateModelAttributes(pageNum, page);
+    }
+
 
     public Product save(Product product) {
         if (product.getId() == null) {

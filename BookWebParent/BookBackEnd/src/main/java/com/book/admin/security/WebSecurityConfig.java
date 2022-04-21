@@ -62,6 +62,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/",true)
                 .permitAll()
                 .and().logout().permitAll();
+        http.headers().frameOptions().sameOrigin();
+
     }
     @Override
     public void configure(WebSecurity webSecurity) throws Exception{

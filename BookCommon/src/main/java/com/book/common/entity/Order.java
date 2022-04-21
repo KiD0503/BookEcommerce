@@ -1,6 +1,8 @@
 package com.book.common.entity;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -225,6 +227,21 @@ public class Order {
         String destination =  city + ", ";
 
         return destination;
+    }
+
+    public void copyShippingAddress(Address address) {
+        setFirstName(address.getFirstName());
+        setLastName(address.getLastName());
+        setPhoneNumber(address.getPhoneNumber());
+        setAddressLine(address.getAddressLine());
+        setCity(address.getCity());
+        setPostalCode(address.getPostalCode());
+    }
+
+    @Transient
+    public String getDeliverDateOnForm() {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        return dateFormatter.format(this.deliverDate);
     }
 
 }

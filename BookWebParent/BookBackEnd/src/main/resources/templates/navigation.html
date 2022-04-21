@@ -37,9 +37,6 @@
                         <a class="nav-link under-a" th:href="@{/customers}">Customers</a>
                     </li>
                 </th:block>
-                <li class="nav-item">
-                    <a class="nav-link under-a" th:href="@{/shipping}">Shipping</a>
-                </li>
                 <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
                     <li class="nav-item">
                         <a class="nav-link under-a" th:href="@{/orders}">Orders</a>
@@ -52,15 +49,6 @@
                     </li>
                 </th:block>
 
-                <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                    <li class="nav-item">
-                        <a class="nav-link under-a" th:href="@{/articles}">Articles</a>
-                    </li>
-                </th:block>
-
-                <li class="nav-item">
-                    <a class="nav-link under-a" th:href="@{/menus}">Menus</a>
-                </li>
                 <li class="nav-item" sec:authorize="hasAuthority('Admin')">
                     <a class="nav-link under-a" th:href="@{/settings}">Settings</a>
                 </li>

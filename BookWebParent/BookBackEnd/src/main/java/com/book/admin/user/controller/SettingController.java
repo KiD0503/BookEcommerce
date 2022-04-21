@@ -98,4 +98,5 @@ public class SettingController {
 
         return "redirect:/settings#mailTemplates";
     }
+
 }

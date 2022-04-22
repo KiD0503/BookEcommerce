@@ -2,6 +2,7 @@ package com.book.common.entity;
 
 import javax.persistence.*;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -53,7 +54,7 @@ public class Order {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetail> orderDetails = new HashSet<>();
 
     public Integer getId() {
@@ -214,6 +215,7 @@ public class Order {
         setPhoneNumber(customer.getPhoneNumber());
         setAddressLine(customer.getAddressLine());
         setCity(customer.getCity());
+        setPostalCode(customer.getPostalCode());
     }
 
     @Override
@@ -242,6 +244,16 @@ public class Order {
     public String getDeliverDateOnForm() {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormatter.format(this.deliverDate);
+    }
+
+    public void setDeliverDateOnForm(String dateString) {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        try {
+            this.deliverDate = dateFormatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
 }

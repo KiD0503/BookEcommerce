@@ -62,4 +62,12 @@ public class OrderService {
 
         orderRepository.deleteById(id);
     }
+
+    public void save(Order orderInForm) {
+        Order orderInDB = orderRepository.findById(orderInForm.getId()).get();
+        orderInForm.setOrderTime(orderInDB.getOrderTime());
+        orderInForm.setCustomer(orderInDB.getCustomer());
+
+        orderRepository.save(orderInForm);
+    }
 }

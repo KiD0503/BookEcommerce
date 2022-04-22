@@ -75,6 +75,7 @@ public class CustomerService {
         customer.setPassword("");
         customer.setAddressLine("");
         customer.setCity("");
+        customer.setPostalCode("");
         customer.setPhoneNumber("");
 
         customerRepository.save(customer);

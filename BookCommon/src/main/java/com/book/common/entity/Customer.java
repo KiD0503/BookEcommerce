@@ -37,6 +37,10 @@ public class Customer {
 
     private boolean enabled;
 
+    @Column(name = "postal_code", nullable = false, length = 10)
+    private String postalCode;
+
+
     @Column(name = "created_time")
     private Date createdTime;
 
@@ -110,6 +114,14 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
     public String getCity() {
         return city;
     }
@@ -144,7 +156,7 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer [id=" + id + ", email=" + email + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+        return  firstName + " " + lastName + ", " + addressLine+ ", " + city + ". Phone Number: " + phoneNumber + ". Postal Code: " + postalCode;
     }
 
     public String getFullName() {
@@ -178,6 +190,8 @@ public class Customer {
         if (!city.isEmpty()) address += ", " + city;
 
         if (!phoneNumber.isEmpty()) address += ". Phone Number: " + phoneNumber;
+
+        if (!postalCode.isEmpty()) address += ". Postal Code: " + postalCode;
 
         return address;
     }

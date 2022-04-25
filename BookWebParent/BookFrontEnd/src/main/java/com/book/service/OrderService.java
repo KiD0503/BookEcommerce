@@ -4,6 +4,10 @@ import com.book.common.entity.*;
 import com.book.other.CheckoutInfo;
 import com.book.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -12,6 +16,9 @@ import java.util.Set;
 
 @Service
 public class OrderService {
+
+    public static final int ORDERS_PER_PAGE = 5;
+
 
     @Autowired
     private OrderRepository orderRepository;
@@ -54,5 +61,24 @@ public class OrderService {
 
 
         return orderRepository.save(newOrder);
+    }
+
+    public Page<Order> listForCustomerByPage(Customer customer, int pageNum,
+                                             String sortField, String sortDir, String keyword) {
+        Sort sort = Sort.by(sortField);
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        Pageable pageable = PageRequest.of(pageNum - 1, ORDERS_PER_PAGE, sort);
+
+        if (keyword != null) {
+            return orderRepository.findAll(keyword, customer.getId(), pageable);
+        }
+
+        return orderRepository.findAll(customer.getId(), pageable);
+
+    }
+
+    public Order getOrder(Integer id, Customer customer) {
+        return orderRepository.findByIdAndCustomer(id, customer);
     }
 }

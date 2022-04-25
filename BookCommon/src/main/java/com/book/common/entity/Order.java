@@ -256,4 +256,19 @@ public class Order {
         }
     }
 
+    @Transient
+    public String getProductNames() {
+        String productNames = "";
+
+        productNames = "<ul>";
+
+        for (OrderDetail detail : orderDetails) {
+            productNames += "<li>" + detail.getProduct().getShortName() + "</li>";
+        }
+
+        productNames += "</ul>";
+
+        return productNames;
+    }
+
 }

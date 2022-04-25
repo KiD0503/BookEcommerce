@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement()//Fix "cannot create a session after the response has been committed" để fix lỗi này nếu gặp
                 .sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
         http.authorizeRequests()
-                .antMatchers("/account_details", "/update_account_details",
+                .antMatchers("/account_details", "/update_account_details","/orders/**",
                         "/cart", "/address_book/**", "/checkout", "/place_order").authenticated()
                 .anyRequest().permitAll()
                 .and()

@@ -83,7 +83,7 @@ public class CustomerController {
     }
 
     @GetMapping("/customers/edit/{id}")
-    public String editCustomer(@PathVariable("id") Integer id, Model model, RedirectAttributes ra) {
+    public String editCustomer(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
         try {
             Customer customer = customerService.get(id);
             model.addAttribute("customer", customer);
@@ -92,26 +92,26 @@ public class CustomerController {
             return "customers/customer_form";
 
         } catch (CustomerNotFoundException ex) {
-            ra.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
             return "redirect:/customers";
         }
     }
 
     @PostMapping("/customers/save")
-    public String saveCustomer(Customer customer, Model model, RedirectAttributes redirectAttributes) {
+    public String saveCustomer(Customer customer, RedirectAttributes redirectAttributes) {
         customerService.save(customer);
         redirectAttributes.addFlashAttribute("message", "The customer ID " + customer.getId() + " has been updated successfully.");
         return "redirect:/customers";
     }
 
     @GetMapping("/customers/delete/{id}")
-    public String deleteCustomer(@PathVariable Integer id, RedirectAttributes ra) {
+    public String deleteCustomer(@PathVariable Integer id, RedirectAttributes redirectAttributes) {
         try {
             customerService.delete(id);
-            ra.addFlashAttribute("message", "The customer ID " + id + " has been deleted successfully.");
+            redirectAttributes.addFlashAttribute("message", "The customer ID " + id + " has been deleted successfully.");
 
         } catch (CustomerNotFoundException ex) {
-            ra.addFlashAttribute("message", ex.getMessage());
+            redirectAttributes.addFlashAttribute("message", ex.getMessage());
         }
 
         return "redirect:/customers";

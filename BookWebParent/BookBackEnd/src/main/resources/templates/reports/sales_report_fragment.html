@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content(reportType)" th:remove="tag">
+  <div th:with="buttonClass = 'button-sales-by' + ${reportType}">
+    <button period="last_7_days" class="btn btn-primary m-1" th:classappend="${buttonClass}">Last 7 days</button>
+    <button period="last_28_days" class="btn btn-light m-1" th:classappend="${buttonClass}">Last 28 days</button>
+    <button period="last_6_months" class="btn btn-light m-1" th:classappend="${buttonClass}">Last 6 Months</button>
+    <button period="last_year" class="btn btn-light m-1" th:classappend="${buttonClass}">Last Year</button>
+    <button class="btn btn-light m-1" th:classappend="${buttonClass}">Custom Date Range</button>
+  </div>
+
+  <form>
+    <div th:id="'divCustomDateRange' + ${reportType}" class="d-none">
+      From date: <input type="date" th:id="'startDate' + ${reportType}"> &nbsp;
+      To date: <input type="date" th:id="'endDate' + ${reportType}"> &nbsp;
+      <button type="button" class="btn btn-secondary" th:id="'buttonViewReportByDateRange' + ${reportType}">View</button>
+    </div>
+  </form>
+
+  <div th:id="'chart_sales_by' + ${reportType}" class="justify-content-center mt-3"></div>
+</div>
+</body>
+</html>

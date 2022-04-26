@@ -36,7 +36,7 @@
     background: #eeeeee;
     transform: scale(0, 1);
     transform-origin: right top;
-    transition: transform .6s;
+    transition: transform .8s;
 }
 .under-a:hover::after {
     transform-origin: left top;
@@ -58,7 +58,7 @@
     background: #333333;
     transform: scale(0, 1);
     transform-origin: right top;
-    transition: transform .3s;
+    transition: transform .6s;
 }
 .under-a-black:hover::after {
     transform-origin: left top;

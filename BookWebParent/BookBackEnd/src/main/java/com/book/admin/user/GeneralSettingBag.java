@@ -14,7 +14,4 @@ public class GeneralSettingBag extends SettingBag {
 		super.update("CURRENCY_SYMBOL", value);
 	}
 
-	public void updateSiteLogo(String value) {
-		super.update("SITE_LOGO", value);
-	}
 }

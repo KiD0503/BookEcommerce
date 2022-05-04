@@ -10,7 +10,7 @@
 		<a href="#platform-used">Platform Used</a>
 	</li>
 	<li>
-		<a href="#version-history">Features</a>
+		<a href="#features">Features</a>
 	</li>
 	<li>
 		<a href="#contributor">Contributor</a>
@@ -20,7 +20,7 @@
 <p align="justify">As a self-taught programmer, <b>Hieu Nguyen</b> created KidBook, a book inventory, and sales management system. During the COVID-19 period, the goal is to build an online bookstore. For the convenience of its users, KidBook has a chatbot powered by artificial intelligence (AI) to help them answer common inquiries.
 With KidBook, I want to give consumers an easy-to-navigate website that they can utilize right away.
 </p>
-<p align="justify"><b>Production Screencast Link: </b><a href="https://youtu.be/PcYw_KBYkgE">https://youtu.be/PcYw_KBYkgE</a></p>
+<h2><a href="platform-used"></a>Platform Used</h2>
 <table>
 	<tr>
 		<th>

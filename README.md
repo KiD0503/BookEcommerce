@@ -47,7 +47,12 @@ With KidBook, I want to give consumers an easy-to-navigate website that they can
 			</br>
 			<img src="https://user-images.githubusercontent.com/77705854/114490619-5fdb1c80-9c3f-11eb-946e-aa52a40d1c23.png">
 			</br>
+			<b>Bootstrap</b>
 			<img src="https://user-images.githubusercontent.com/77705854/114490623-6073b300-9c3f-11eb-9037-fcfd4ed4e111.png">
+			</br>
+			<b>Thymeleaf</b>
+			</br>
+			<img width="120" src="https://images.g2crowd.com/uploads/product/image/social_landscape/social_landscape_f0fb427a476a9f323ac6de7ca836180b/thymeleaf.png">	
 		</th>
 	</tr>
 	

@@ -43,12 +43,20 @@ With KidBook, I want to give consumers an easy-to-navigate website that they can
 		</th>
 		<th>
 	<p>
-			<img src="https://user-images.githubusercontent.com/77705854/114490615-5ea9ef80-9c3f-11eb-8035-6394df61d1dd.png">
+			<b>HTML</b>
 			</br>
-			<img src="https://user-images.githubusercontent.com/77705854/114490619-5fdb1c80-9c3f-11eb-946e-aa52a40d1c23.png">
+			<img width="100" src="https://icon-library.com/images/icon-html5/icon-html5-7.jpg">
+			</br>
+			<b>CSS</b>
+			</br>
+			<img width="70" src="https://static.cdnlogo.com/logos/c/18/css.svg">
+			</br>
+			<b>Javascript</b>
+			</br>
+			<img width="150" src="https://fedojo.com/wp-content/uploads/2019/03/logo-javascript-png-html-code-allows-to-embed-javascript-logo-in-your-website-587.png">
 			</br>
 			<b>Bootstrap</b>
-			<img src="https://user-images.githubusercontent.com/77705854/114490623-6073b300-9c3f-11eb-9037-fcfd4ed4e111.png">
+			<img width="150" src="https://user-images.githubusercontent.com/77705854/114490623-6073b300-9c3f-11eb-9037-fcfd4ed4e111.png">
 			</br>
 			<b>Thymeleaf</b>
 			</br>
